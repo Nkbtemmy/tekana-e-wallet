@@ -1,0 +1,17 @@
+_format_version: "2.1"
+_transform: true
+
+services:
+  - name: my-app-service
+    url: http://app:2024
+
+    routes:
+      - name: my-app-route
+        paths:
+          - /
+        strip_path: true
+
+plugins:
+- name: rate-limiting
+  config:
+    minute: 10
