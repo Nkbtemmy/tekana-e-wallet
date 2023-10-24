@@ -7,6 +7,7 @@ module.exports = (sequelize:any, DataTypes:any) => {
     id!: string;
     accountId!: string;
     customerId!: string;
+    toAccountId!: string;
     transactionType!: string;
     amount!: number;
     transactionDate!: Date;
@@ -16,8 +17,9 @@ module.exports = (sequelize:any, DataTypes:any) => {
   
 
     static associate(models:any) {
-      Transaction.belongsTo(models.Customer, { foreignKey: 'customerId' });
-      Transaction.belongsTo(models.Account, { foreignKey: 'accountId' });
+      Transaction.belongsTo(models.Customer, { foreignKey: 'customerId', as: 'customer' });
+      Transaction.belongsTo(models.Account, { foreignKey: 'accountId', as: 'senderAccount' });
+      Transaction.belongsTo(models.Account, { foreignKey: 'toAccountId',  as: 'receiverAccount' });
     }
   }
   Transaction.init({
@@ -34,6 +36,10 @@ module.exports = (sequelize:any, DataTypes:any) => {
     customerId:{
       type: DataTypes.UUID,
       allowNull: false
+    },
+    toAccountId:{
+      type: DataTypes.UUID,
+      allowNull: true
     },
     transactionType:{
       type: DataTypes.ENUM('DEPOSIT', 'WITHDRAWAL', 'TRANSFER'),

@@ -1,6 +1,6 @@
 import DB from "../database/models";
 
-const { Account, Customer  } = DB;
+const { Account, Customer, Wallet  } = DB;
 
 export default class AccountService {
 	static async create(data: object) {
@@ -18,7 +18,20 @@ export default class AccountService {
 	}
 
 	static async findByPk(id: string) {
-		return Account.findByPk(id);
+		return Account.findByPk(id,{
+			include: [
+				{
+				  model: Wallet,
+				  attributes: ['walletBalance'],
+				  include: [
+					{
+					  model: Customer,
+					  attributes: ['firstName', 'lastName', 'email'],
+					},
+				  ],
+				},
+			  ],
+		});
 	}
 
 	static async delete(id: string) {
@@ -35,13 +48,19 @@ export default class AccountService {
 
 	static async findAllAndCount(condition: object) {
 		return await Account.findAndCountAll({
-			where: condition,
-			include: [
+		  where: condition,
+		  include: [
+			{
+			  model: Wallet,
+			  attributes: ['walletBalance'],
+			  include: [
 				{
 				  model: Customer,
-				  attributes: ['firstName', 'lastName', 'email']
+				  attributes: ['firstName', 'lastName', 'email'],
 				},
-			],
+			  ],
+			},
+		  ],
 		});
 	}
 

@@ -11,17 +11,17 @@ const customer = {
           name: 'body',
           schema: {
             example:{
-              firstName:"",
-              lastName:"",
-              email:"",
-              password:"",
-              telephoneNumber:"",
-              address:{
-                city:"",
-                street:"",
-                sector:"",
+              "firstName": "admin",
+              "lastName": "example",
+              "email": "admin@example.com",
+              "password": "admin123!",
+              "telephoneNumber": "0788888776",
+              "address": {
+                "city": "Kigali",
+                "street": "Nyamirambo",
+                "sector": "Rwezamenyo"
               },
-              dateOfBirth:"",
+              "dateOfBirth": "10/12/2001"
             }
           }
         }

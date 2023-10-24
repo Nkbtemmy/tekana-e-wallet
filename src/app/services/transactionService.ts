@@ -3,7 +3,7 @@ import { formatOrClause } from "../utils/helpers/search";
 import { Op } from "sequelize";
 
 
-const { Transaction, Customer } = DB;
+const { Transaction, Customer, Account } = DB;
 
 export default class TransactionService {
 	static async create(data: object) {
@@ -49,8 +49,19 @@ export default class TransactionService {
 			where: whereClause,
 			include: [
 				{
-				  model: Customer,
-				  attributes: ['firstName', 'lastName', 'email']
+					model: Customer,
+					as: 'customer',
+					attributes: ['firstName', 'lastName', 'email']
+				},
+				{
+					model: Account,
+					as: 'senderAccount',
+					attributes: ['balance']
+				},
+				{
+					model: Account,
+					as: 'receiverAccount',
+					attributes: ['balance']
 				},
 			],
 		});

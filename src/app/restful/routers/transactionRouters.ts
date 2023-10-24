@@ -5,28 +5,45 @@ import {  isLoggedIn } from "../middlewares/authMiddleware";
 const router = express();
 
 router
+    .get(
+        "/",
+        isLoggedIn,
+        TransactionControllers.getAllMyTransactionsType
+    )
     .post(
-        "/",
+        "/deposit",
         isLoggedIn,
-        TransactionControllers.create
+        TransactionControllers.deposit
     )
     .get(
-        "/",
+        "/:deposit",
         isLoggedIn,
-        TransactionControllers.getAll
+        TransactionControllers.getAllMyTransactionsType
+    )
+    .post(
+        "/withdrawal",
+        isLoggedIn,
+        TransactionControllers.withdrawal
     )
     .get(
-        "/:id", 
+        "/:withdrawal",
+        isLoggedIn,
+        TransactionControllers.getAllMyTransactionsType
+    )
+    .post(
+        "/transfer",
+        isLoggedIn,
+        TransactionControllers.transfer
+    )
+    .get(
+        "/:transfer",
+        isLoggedIn,
+        TransactionControllers.getAllMyTransactionsType
+    )
+    .get(
+        "/single/:id", 
         TransactionControllers.getOne
-    )
-    .put(
-        "/:id", 
-        TransactionControllers.update
-    )
-    .delete(
-		"/:id",
-        TransactionControllers.create
-	);
+    );
 
 
 export default router;

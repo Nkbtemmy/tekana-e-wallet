@@ -10,7 +10,7 @@ module.exports = {
 				primaryKey: true,
 				allowNull: false,
 			},
-      customerId: {
+      		customerId: {
 				type: DataTypes.UUID,
 				allowNull: false,
 			},

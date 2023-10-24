@@ -7,7 +7,7 @@ module.exports = (sequelize:any, DataTypes:any) => {
   class Account extends Model<AccountAttributes> 
   implements AccountAttributes{
     id!: string;
-    customerId!: string;
+    walletId!: string;
     accountType!: string;
     accountNumber!: string;
     balance!: number;
@@ -16,7 +16,10 @@ module.exports = (sequelize:any, DataTypes:any) => {
     updatedAt!: Date;
 
     static associate(models:any) {
-      Account.belongsTo(models.Customer, { foreignKey: 'customerId' })
+      Account.belongsTo(models.Wallet, { foreignKey: 'walletId' })
+      Account.hasMany(models.Transaction, { foreignKey: 'accountId' })
+      Account.hasMany(models.Transaction, { foreignKey: 'toAccountId' })
+
     }
   }
   Account.init({
@@ -26,7 +29,11 @@ module.exports = (sequelize:any, DataTypes:any) => {
       allowNull: false,
       primaryKey: true
     },
-    customerId: {
+    // customerId: {
+    //   type: DataTypes.UUID,
+    //   allowNull: false
+    // },
+    walletId: {
       type: DataTypes.UUID,
       allowNull: false
     },

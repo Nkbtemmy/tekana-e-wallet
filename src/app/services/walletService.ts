@@ -1,6 +1,6 @@
 import DB from "../database/models";
 
-const { Wallet, Customer } = DB;
+const { Wallet, Customer, Account } = DB;
 
 export default class WalletService {
 	static async create(data: object) {
@@ -18,8 +18,12 @@ export default class WalletService {
 			where: condition,
 			include: [
 				{
-				  model: Customer,
-				  attributes: ['firstName', 'lastName', 'email']
+					model: Customer,
+					attributes: ['firstName', 'lastName', 'email']
+				},
+				{
+					model: Account,
+					exclude: ['customerId', 'createdAt'],
 				},
 			],
 		});
@@ -44,5 +48,22 @@ export default class WalletService {
 			},
 		});
 	}
+
+	static async getWalletIdByCustomerId(customerId: string) {
+		const customer = await Customer.findByPk(customerId);
+		if (!customer) {
+		  throw new Error('Customer not found');
+		}
+	
+		const wallet = await Wallet.findOne({
+		  where: { customerId: customer.id },
+		});
+	
+		if (!wallet) {
+		  throw new Error('Wallet not found for this customer');
+		}
+	
+		return wallet.id;
+	  }
 
 }

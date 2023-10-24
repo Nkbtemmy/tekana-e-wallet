@@ -3,7 +3,7 @@ import responses from '../responses'
 const transaction = {
   '/transactions': {
     get: {
-      tags: ['transaction'],
+      tags: ['Transaction'],
       summary: 'get all your transactions',
       security: [{
         JWT: []
@@ -21,7 +21,7 @@ const transaction = {
   },
   '/transactions/deposit': {
     post: {
-      tags: ['transaction'],
+      tags: ['Transaction'],
       summary: 'make deposite',
       security: [{
         JWT: []
@@ -47,7 +47,7 @@ const transaction = {
       responses,
     },
     get: {
-      tags: ['transaction'],
+      tags: ['Transaction'],
       summary: 'get all your deposit transactions',
       security: [{
         JWT: []
@@ -65,7 +65,7 @@ const transaction = {
   },
   '/transactions/withdrawal': {
     post: {
-      tags: ['transaction'],
+      tags: ['Transaction'],
       summary: 'make withdrawal',
       security: [{
         JWT: []
@@ -91,7 +91,7 @@ const transaction = {
       responses,
     },
     get: {
-      tags: ['transaction'],
+      tags: ['Transaction'],
       summary: 'get all your withdrawal transactions',
       security: [{
         JWT: []
@@ -109,7 +109,7 @@ const transaction = {
   },
   '/transactions/transfer': {
     post: {
-      tags: ['transaction'],
+      tags: ['Transaction'],
       summary: 'make transfer',
       security: [{
         JWT: []
@@ -136,7 +136,7 @@ const transaction = {
       responses,
     },
     get: {
-      tags: ['transaction'],
+      tags: ['Transaction'],
       summary: 'get all your transfer transactions',
       security: [{
         JWT: []
@@ -151,6 +151,30 @@ const transaction = {
       ],
       responses,
     },
+  },
+  '/transactions/single/{id}': {
+    get: {
+      tags: ['Transaction'],
+      summary: 'Get one transaction',
+      parameters: [
+        {
+					in: "path",
+					name: "id",
+					required: true,
+					type: "string",
+				},
+      ],
+      consumes: [
+        'application/json'
+      ],
+      produces: [
+        'application/json'
+      ],
+      responses,
+      security: [{
+        JWT: []
+      }]
+	  }
   },
 }
 

@@ -1,6 +1,7 @@
 import { Response } from "express";
 
 import AccountService from "../../services/accountService";
+import WalletService from "../../services/walletService";
 
 export default class AccountControllers{
 
@@ -8,8 +9,9 @@ export default class AccountControllers{
         try {
             const { id: customerId } = req.user;
             const { accountType } = req.body;
+            const customerWalletId = await WalletService.getWalletIdByCustomerId(customerId)
             const accountExist = await AccountService.findOne({
-              customerId,
+              walletId:customerWalletId,
               accountType
             });
             if(accountExist){
@@ -19,7 +21,7 @@ export default class AccountControllers{
             }
 
             AccountService.create({
-              customerId, accountType
+              walletId:customerWalletId, accountType
               }).then(resp=>{
                         const data = {
                             message: "account created Successfully",
@@ -46,7 +48,8 @@ export default class AccountControllers{
     static async getAllMyAccount(req:any, res:Response){
       try {
           const { id: customerId } = req.user;
-         AccountService.findAllAndCount({customerId}).then((resp)=>{
+          const customerWalletId = await WalletService.getWalletIdByCustomerId(customerId)
+         AccountService.findAllAndCount({walletId:customerWalletId}).then((resp)=>{
           return res.status(200).json({
             message: "accounts retreived successfuly",
             data:resp

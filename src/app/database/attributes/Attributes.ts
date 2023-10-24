@@ -18,7 +18,8 @@ export interface CustomerAttributes extends BaseModelAttributes {
 }
 
 export interface AccountAttributes extends BaseModelAttributes {
-    customerId: string;
+    // customerId: string;
+    walletId: string;
     accountType: string;
     accountNumber: string;
     balance: number,
@@ -28,6 +29,7 @@ export interface AccountAttributes extends BaseModelAttributes {
 export interface TransactionAttributes extends BaseModelAttributes {
     accountId: string;
     customerId: string;
+    toAccountId: string;
     transactionType: string;
     amount: number,
     transactionDate: Date,

@@ -12,7 +12,8 @@ module.exports = (sequelize:any, DataTypes:any) => {
     createdAt!: Date;
     updatedAt!: Date;
     static associate(models:any) {
-      Wallet.belongsTo(models.Customer, { foreignKey: 'customerId' })
+      Wallet.belongsTo(models.Customer, { foreignKey: 'customerId' });
+      Wallet.hasMany(models.Account, { foreignKey: 'walletId', onDelete: 'CASCADE' });
     }
   }
   Wallet.init({

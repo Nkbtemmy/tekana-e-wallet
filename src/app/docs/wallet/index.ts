@@ -3,7 +3,7 @@ import responses from '../responses'
 const wallet = {
   '/wallets': {
     post: {
-      tags: ['wallet'],
+      tags: ['Wallet'],
       summary: 'create new wallet',
       security: [{
         JWT: []
@@ -19,7 +19,7 @@ const wallet = {
       responses,
     },
     get: {
-      tags: ['wallet'],
+      tags: ['Wallet'],
       summary: 'get all my wallets',
       security: [{
         JWT: []

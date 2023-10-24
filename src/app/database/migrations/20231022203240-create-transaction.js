@@ -18,6 +18,10 @@ module.exports = {
         type: DataTypes.UUID,
         allowNull: false
       },
+      toAccountId:{
+        type: DataTypes.UUID,
+        allowNull: true
+      },
       transactionType:{
         type: DataTypes.ENUM('DEPOSIT', 'WITHDRAWAL', 'TRANSFER'),
         defaultValue: 'DEPOSIT',

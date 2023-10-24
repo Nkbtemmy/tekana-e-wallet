@@ -19,7 +19,7 @@ module.exports = (sequelize:any, DataTypes:any) => {
     updatedAt!: Date;
 
     static associate(models:any) {
-      Customer.hasMany(models.Account, { foreignKey: 'customerId', onDelete: 'CASCADE' });
+      // Customer.hasMany(models.Account, { foreignKey: 'customerId', onDelete: 'CASCADE' });
       Customer.hasMany(models.Transaction, { foreignKey: 'customerId', onDelete: 'CASCADE' });
       Customer.hasOne(models.Wallet, { foreignKey: 'customerId', onDelete: 'CASCADE' });
 
