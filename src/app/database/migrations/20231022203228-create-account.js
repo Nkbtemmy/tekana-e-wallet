@@ -15,34 +15,34 @@ module.exports = {
 				allowNull: false,
 			},
 			accountType: {
-        type: DataTypes.ENUM('SAVING', 'CHECKING'),
-        defaultValue: 'CHECKING',
-        allowNull: false,
-			},
-      accountNumber: {
-				type: DataTypes.UUID,
-        defaultValue: uuidv4(),
+				type: DataTypes.ENUM("SAVING", "CHECKING"),
+				defaultValue: "CHECKING",
 				allowNull: false,
 			},
-      balance: {
-        type: DataTypes.DECIMAL(10, 2),
-        allowNull: false,
-        defaultValue: 0
-      },
-      openDate: {
-        type: DataTypes.DATE,
-        allowNull: false,
-        defaultValue: DataTypes.NOW,
-      },
+			accountNumber: {
+				type: DataTypes.UUID,
+				defaultValue: uuidv4(),
+				allowNull: false,
+			},
+			balance: {
+				type: DataTypes.DECIMAL(10, 2),
+				allowNull: false,
+				defaultValue: 0,
+			},
+			openDate: {
+				type: DataTypes.DATE,
+				allowNull: false,
+				defaultValue: DataTypes.NOW,
+			},
 			createdAt: {
 				allowNull: false,
 				type: DataTypes.DATE,
-        defaultValue: DataTypes.NOW,
+				defaultValue: DataTypes.NOW,
 			},
 			updatedAt: {
 				allowNull: false,
 				type: DataTypes.DATE,
-        defaultValue: DataTypes.NOW,
+				defaultValue: DataTypes.NOW,
 			},
 		});
 	},

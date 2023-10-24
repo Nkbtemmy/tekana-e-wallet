@@ -12,6 +12,6 @@ services:
         strip_path: true
 
 plugins:
-- name: rate-limiting
-  config:
-    minute: 10
+  - name: rate-limiting
+    config:
+      minute: 10

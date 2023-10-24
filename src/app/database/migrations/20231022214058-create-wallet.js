@@ -10,24 +10,24 @@ module.exports = {
 				primaryKey: true,
 				allowNull: false,
 			},
-      		customerId: {
+			customerId: {
 				type: DataTypes.UUID,
 				allowNull: false,
 			},
 			walletBalance: {
-        type: DataTypes.DECIMAL(10, 2),
-        allowNull: false,
-        defaultValue: 0
+				type: DataTypes.DECIMAL(10, 2),
+				allowNull: false,
+				defaultValue: 0,
 			},
 			createdAt: {
 				allowNull: false,
 				type: DataTypes.DATE,
-        defaultValue: DataTypes.NOW,
+				defaultValue: DataTypes.NOW,
 			},
 			updatedAt: {
 				allowNull: false,
 				type: DataTypes.DATE,
-        defaultValue: DataTypes.NOW,
+				defaultValue: DataTypes.NOW,
 			},
 		});
 	},

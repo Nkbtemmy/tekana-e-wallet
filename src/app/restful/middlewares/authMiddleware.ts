@@ -50,4 +50,3 @@ export const isAuthorized =
 			return res.status(403).send({ message: "Forbidden" });
 		next();
 	};
-

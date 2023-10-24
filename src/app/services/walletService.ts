@@ -19,11 +19,11 @@ export default class WalletService {
 			include: [
 				{
 					model: Customer,
-					attributes: ['firstName', 'lastName', 'email']
+					attributes: ["firstName", "lastName", "email"],
 				},
 				{
 					model: Account,
-					exclude: ['customerId', 'createdAt'],
+					exclude: ["customerId", "createdAt"],
 				},
 			],
 		});
@@ -52,18 +52,17 @@ export default class WalletService {
 	static async getWalletIdByCustomerId(customerId: string) {
 		const customer = await Customer.findByPk(customerId);
 		if (!customer) {
-		  throw new Error('Customer not found');
+			throw new Error("Customer not found");
 		}
-	
-		const wallet = await Wallet.findOne({
-		  where: { customerId: customer.id },
-		});
-	
-		if (!wallet) {
-		  throw new Error('Wallet not found for this customer');
-		}
-	
-		return wallet.id;
-	  }
 
+		const wallet = await Wallet.findOne({
+			where: { customerId: customer.id },
+		});
+
+		if (!wallet) {
+			throw new Error("Wallet not found for this customer");
+		}
+
+		return wallet.id;
+	}
 }

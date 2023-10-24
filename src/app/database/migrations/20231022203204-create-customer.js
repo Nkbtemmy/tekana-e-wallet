@@ -32,7 +32,7 @@ module.exports = {
 				allowNull: true,
 			},
 			address: {
-        		type: DataTypes.JSONB,
+				type: DataTypes.JSONB,
 				allowNull: true,
 			},
 			dateOfBirth: {
@@ -47,12 +47,12 @@ module.exports = {
 			createdAt: {
 				allowNull: false,
 				type: DataTypes.DATE,
-        defaultValue: DataTypes.NOW,
+				defaultValue: DataTypes.NOW,
 			},
 			updatedAt: {
 				allowNull: false,
 				type: DataTypes.DATE,
-        defaultValue: DataTypes.NOW,
+				defaultValue: DataTypes.NOW,
 			},
 		});
 	},

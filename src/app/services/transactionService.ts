@@ -2,7 +2,6 @@ import DB from "../database/models";
 import { formatOrClause } from "../utils/helpers/search";
 import { Op } from "sequelize";
 
-
 const { Transaction, Customer, Account } = DB;
 
 export default class TransactionService {
@@ -50,21 +49,20 @@ export default class TransactionService {
 			include: [
 				{
 					model: Customer,
-					as: 'customer',
-					attributes: ['firstName', 'lastName', 'email']
+					as: "customer",
+					attributes: ["firstName", "lastName", "email"],
 				},
 				{
 					model: Account,
-					as: 'senderAccount',
-					attributes: ['balance']
+					as: "senderAccount",
+					attributes: ["balance"],
 				},
 				{
 					model: Account,
-					as: 'receiverAccount',
-					attributes: ['balance']
+					as: "receiverAccount",
+					attributes: ["balance"],
 				},
 			],
 		});
 	}
-
 }

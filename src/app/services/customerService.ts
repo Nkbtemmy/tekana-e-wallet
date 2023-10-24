@@ -23,7 +23,5 @@ export default class CustomerService {
 		return await Customer.findOne({
 			where: condition,
 		});
-	
-
 	}
 }
