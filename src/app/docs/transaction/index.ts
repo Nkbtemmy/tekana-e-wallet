@@ -156,6 +156,28 @@ const transaction = {
 			],
 		},
 	},
+	"/transactions/accounts/{id}": {
+		get: {
+			tags: ["Transaction"],
+			summary: "Get account transactions",
+			parameters: [
+				{
+					in: "path",
+					name: "id",
+					required: true,
+					type: "string",
+				},
+			],
+			consumes: ["application/json"],
+			produces: ["application/json"],
+			responses,
+			security: [
+				{
+					JWT: [],
+				},
+			],
+		},
+	},
 };
 
 export default transaction;

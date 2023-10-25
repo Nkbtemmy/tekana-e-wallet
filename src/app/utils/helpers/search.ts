@@ -5,8 +5,8 @@ export const formatOrClause = (query: string) => {
 	let queryObject = {};
 	try {
 		queryObject = JSON.parse(query);
-	} catch (error) {
-		// console.log(error?.message)
+	} catch (error:any) {
+		throw new Error(error?.message)
 	}
 	for (const [key, value] of Object.entries(queryObject)) {
 		orClause.push({

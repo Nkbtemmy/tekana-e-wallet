@@ -17,16 +17,7 @@ export default class TransactionControllers {
 				});
 			}
 
-			const accountExist = await AccountService.findByPk(accountId);
-
-			if (!accountExist) {
-				return res.status(404).json({
-					message: "Account you are trying to deposit on doesn't exist",
-				});
-			}
-
-			accountExist.amount += amount;
-			await accountExist.save();
+			await WalletService.updateAccountAndWalletBalance(accountId,"+", amount)
 
 			const transactionData = {
 				customerId,
@@ -62,16 +53,7 @@ export default class TransactionControllers {
 				});
 			}
 
-			const accountExist = await AccountService.findByPk(accountId);
-
-			if (!accountExist) {
-				return res.status(404).json({
-					message: "Account you are trying to withdrawal on doesn't exist",
-				});
-			}
-
-			accountExist.amount -= amount;
-			await accountExist.save();
+			await WalletService.updateAccountAndWalletBalance(accountId,"-", amount)
 
 			const transactionData = {
 				customerId,
@@ -126,11 +108,10 @@ export default class TransactionControllers {
 					message: "Account you want to transfer on doesn't exist",
 				});
 			}
-
-			myAccountExist.amount -= amount;
-			accountExist.amount += amount;
-			await myAccountExist.save();
-			await accountExist.save();
+			// removing money from my account
+			await WalletService.updateAccountAndWalletBalance(accountId,"-", amount);
+			// add money to receiver account 
+			await WalletService.updateAccountAndWalletBalance(toAccountId,"+", amount);
 
 			const transactionData = {
 				customerId,
@@ -140,8 +121,6 @@ export default class TransactionControllers {
 				toAccountId,
 				description: req.body.description || null,
 			};
-
-			console.log("transactionData=======", transactionData);
 
 			const createdTransaction =
 				await TransactionService.create(transactionData);
@@ -158,56 +137,11 @@ export default class TransactionControllers {
 		}
 	}
 
-	// static async getAllMyTransactionsType(req: any, res: Response) {
-	//   try {
-	//     let { page, limit } = req.query;
-	//     let { transactionType } = req.params;
-	//     const { id: customerId } = req.user;
-	//     const allowedTransactionTypes = ['DEPOSIT', 'WITHDRAWAL', 'TRANSFER'];
-
-	//     transactionType = transactionType ? transactionType.toUpperCase() : undefined;
-	//     page = page ? Number(page) : undefined;
-	//     limit = limit ? Number(limit) : undefined;
-
-	//     // Check if provided transactionType is valid
-	//     if (transactionType && !allowedTransactionTypes.includes(transactionType)) {
-	//       return res.status(404).json({
-	//         message: "Incorrect transaction type",
-	//       });
-	//     }
-
-	//     const offset = (page - 1) * limit;
-	//     const whereClause: { customerId: string } = { customerId };
-
-	//     // Include transactionType conditionally
-	//     if (transactionType) {
-	//       whereClause.transactionType = transactionType;
-	//     }
-
-	//     const { rows, count } = await TransactionService.findAllAndCount({
-	//       limit,
-	//       offset,
-	//       where: whereClause,
-	//     });
-
-	//     const pagination = paginate(page, count, rows, limit);
-
-	//     return res.status(200).json({
-	//       message: "Transactions retrieved successfully",
-	//       data: { rows, count },
-	//       pagination,
-	//     });
-	//   } catch (error: any) {
-	//     return res.status(500).json({
-	//       message: "Server error",
-	//       error: error.message,
-	//     });
-	//   }
-	// }
 	static async getAllMyTransactionsType(req: Request | any, res: Response) {
 		try {
 			let { page, limit } = req.query;
 			let { transactionType } = req.params;
+			console.log("transaction type", req.params)
 			const { id: customerId } = req.user;
 			const allowedTransactionTypes: string[] = [
 				"DEPOSIT",
@@ -221,7 +155,6 @@ export default class TransactionControllers {
 			page = page ? Number(page) : undefined;
 			limit = limit ? Number(limit) : undefined;
 
-			// Check if provided transactionType is valid
 			if (
 				transactionType &&
 				!allowedTransactionTypes.includes(transactionType)
@@ -239,6 +172,7 @@ export default class TransactionControllers {
 				whereClause.transactionType = transactionType;
 			}
 
+			
 			const { rows, count } = await TransactionService.findAllAndCount({
 				limit,
 				offset,
@@ -272,6 +206,29 @@ export default class TransactionControllers {
 			return res.status(200).json({
 				message: "transaction retreived successfully",
 				data: transaction,
+			});
+		} catch (error: any) {
+			return res.status(500).json({
+				message: "server error",
+				error: error.message,
+			});
+		}
+	}
+
+	static async getAccountTransactions(req: any, res: Response) {
+		try {
+			const { id } = req.params;
+			const transactions = await TransactionService.findAllAndCount({
+				accountId:id
+			});
+			if (!transactions) {
+				return res.status(404).json({
+					message: "transactions not found",
+				});
+			}
+			return res.status(200).json({
+				message: "transactions retreived successfully",
+				data: transactions,
 			});
 		} catch (error: any) {
 			return res.status(500).json({
