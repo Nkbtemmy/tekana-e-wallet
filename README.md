@@ -18,7 +18,7 @@ My strategy for development Tekana-e-Wallet encompasses the following steps:
     - `Docker` for Containilization 
 - **Development Process:** 
     - `Modularity` My Codes are grouped in well structured folders.
-    - `Coding Standards` Framework
+    - `Coding Standards` Are in place
     - `Clear Function and Class Definitions` I used standard to name classes and functions with appropriet naming convention.
     - `Documentation` All my endpoints are documented using swagger ui
 - **Testing and Quality Assurance:** 
@@ -55,6 +55,7 @@ The code is ready to run with minimal configuration. To get started, follow thes
 6. First run `yarn db:migration` or `npm run db:migration`.
 6. Run the application with the scripts specified on next line.
 
+ ``` Good way to test this application with less requirements is to run * make start * while docker is up and running, because it will use images from docker compose and takes the tester shorter time to run without additional installations```
 ## Runnable Scripts
 - `dev`: Runs the project in development mode with automatic server restarts on file changes using nodemon.
 - `ts:dev`: Runs TypeScript code in development with automatic restarts, directory watching, and specifying the entry file using ts-node-dev.
