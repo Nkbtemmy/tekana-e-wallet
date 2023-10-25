@@ -65,7 +65,7 @@ module.exports = (sequelize: any, DataTypes: any) => {
 			},
 			dateOfBirth: {
 				type: DataTypes.DATE,
-				defaultValue: false,
+				defaultValue: DataTypes.NOW,
 			},
 			isLoggedIn: {
 				type: DataTypes.BOOLEAN,

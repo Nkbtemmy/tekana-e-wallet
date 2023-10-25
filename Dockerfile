@@ -1,17 +1,16 @@
-FROM node:18 AS build
-WORKDIR /app
-RUN npm install -g npm@latest
+FROM node:18-alpine
+
+WORKDIR /usr/src/app
+ENV PATH  /usr/src/app/node_modules/.bin:$PATH
 COPY package.json ./
+ENV NODE_ENV=development
+# RUN npm install -g npm@latest
 RUN npm install 
 RUN npm install -g typescript
 RUN npm install -g nodemon
 RUN npm install rimraf
-COPY . .
-RUN npm run build
+RUN npm install -g sequelize-cli
+COPY . . 
+EXPOSE 8000
 
-FROM node:alpine
-WORKDIR /app
-COPY --from=build /app/build ./build
-COPY --from=build /app/package.json ./
-RUN npm install --omit=dev
-CMD ["npm", "run", "start"]
+CMD [ "npm", "run", "ts:dev" ]

@@ -49,7 +49,7 @@ module.exports = (sequelize: any, DataTypes: any) => {
 		{
 			sequelize,
 			modelName: "Wallet",
-			tableName: "tbl_Wallets",
+			tableName: "tbl_wallets",
 			underscored: false,
 		},
 	);
