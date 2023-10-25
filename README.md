@@ -39,10 +39,11 @@ The back-end source code for Tekana-eWallet is hosted on https://github.com/Nkbt
 The database design is optimized for high performance with considerations for indexing, normalization, partitioning, and data types. And i choose to use PostgresSQL database because of its benefits over other SQL databases.
 
 ## API Documentation and Design
-APIs are well-documented and designed with best practices, including clear naming conventions, proper HTTP methods, error handling, versioning, and security measures. [Include documentation or refer to its location.]
+APIs are well-documented and designed with best practices, including clear naming conventions, proper HTTP methods, error handling, versioning, and security measures. https://tekana-e-wallet.onrender.com/api-docs/
 
 ## Creativity and Innovation
 I have incorporated innovative solutions and out-of-the-box thinking to address unique challenges in the e-wallet domain.
+ * I Did also implement auto scaling using node js feature of utilizing server's processorsso that we will have more than one application instance running on server.
 
 ## Running the Code
 The code is ready to run with minimal configuration. To get started, follow these steps:
@@ -77,4 +78,5 @@ The code is ready to run with minimal configuration. To get started, follow thes
 ## Submission
 The source code is available on https://github.com/Nkbtemmy/tekana-e-walletas public repository and will be accessible to anyone want to.
 
-
+## Entity Relationship Diagram(ERD)
+![Alt text](image.png)
