@@ -3,6 +3,9 @@
 ## Introduction
 This project aims to rebuild the back-end solution for the legacy Tekana-eWallet application, serving over 1 million customers worldwide. This README provides an overview of the strategy, technology stack, code source, and features implemented in the revamped back-end system.
 
+## Implented Deployment Architecture
+![Alt text](chrome-capture-2023-10-26.gif)
+
 ## Strategy
 My strategy for development Tekana-e-Wallet encompasses the following steps:
 - **Project Initiation:**  I put myself in cross-functional teams position like:
@@ -81,3 +84,4 @@ The source code is available on https://github.com/Nkbtemmy/tekana-e-walletas pu
 
 ## Entity Relationship Diagram(ERD)
 ![Alt text](image.png)
+
