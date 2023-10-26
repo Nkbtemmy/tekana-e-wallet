@@ -85,3 +85,5 @@ The source code is available on https://github.com/Nkbtemmy/tekana-e-walletas pu
 ## Entity Relationship Diagram(ERD)
 ![Alt text](image.png)
 
+## Proposed architecture
+![Alt text](<chrome-capture-2023-10-26 (1).gif>)
