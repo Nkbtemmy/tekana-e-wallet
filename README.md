@@ -88,3 +88,8 @@ The source code is available on https://github.com/Nkbtemmy/tekana-e-walletas pu
 
 ## Proposed architecture
 ![Alt text](<chrome-capture-2023-10-26 (1).gif>)
+
+## Proposed Architecture Details
+
+In my e-wallet application, i have proposal of implementing a robust microservices architecture to provide the flexibility, scalability, and maintainability required for a modern financial platform. At the core of this architecture, I will employ Apache Kafka for asynchronous communication between microservices, ensuring real-time transaction processing and seamless interaction between the components. The microservices are organized into key areas, including customer management, wallet creation, and transaction recording, each responsible for distinct aspects of the application's functionality. This modular approach enhances the system's agility and maintainability, this will allow me to scale specific components independently to meet varying demands. With a combination of containerization, centralized authentication and authorization, data caching like using redis, and comprehensive testing, the architecture will be designed to offer a secure, high-performance, and responsive e-wallet solution.
+
